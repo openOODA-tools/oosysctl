@@ -1,0 +1,21 @@
+# Maintainer: openOODA-tools <ops@openooda.org>
+pkgname=oosysctl-bin
+_pkgname=oosysctl
+pkgver=0.1.0
+pkgrel=1
+pkgdesc="Inspects and sets Linux kernel parameters at runtime under /proc/sys/."
+arch=('x86_64')
+url="https://github.com/openOODA-tools/oosysctl"
+license=('Apache-2.0')
+depends=('glibc')
+provides=('oosysctl')
+conflicts=('oosysctl')
+source_x86_64=("${url}/releases/download/v${pkgver}/oosysctl-linux-x86_64"
+               "uninstall.sh::https://raw.githubusercontent.com/openOODA-tools/${_pkgname}/v${pkgver}/uninstall.sh")
+sha256sums_x86_64=('SKIP'
+                   'SKIP')
+
+package() {
+    install -Dm755 "${srcdir}/oosysctl-linux-x86_64" "${pkgdir}/usr/bin/oosysctl"
+    install -Dm755 uninstall.sh "${pkgdir}/usr/bin/oosysctl-uninstall"
+}
